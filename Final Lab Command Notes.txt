@@ -1,0 +1,171 @@
+1. How to enter Privileged Execution Mode:
+========================================================
+Router>en 
+2. How to enter configuration terminal:
+========================================================
+Router#conf t
+3. How to chnage hostname:
+========================================================
+Router(config)#hostname BR1
+4. How to write message of the day on router/switch:
+========================================================
+BR1(config)#banner motd "Unauthorized Access is Prohibited"
+5.How to secure privileged execution mode:
+========================================================
+BR1(config)#enable password cricket
+Now time to check the running-config:
+
+BR1#show running-config 
+
+Analysis:
+--------
+Building configuration...
+Current configuration : 720 bytes
+hostname BR1
+enable password cricket
+
+Summary: This is not secure because it shows the password in clear-text.
+6. How to remove/delete command:
+==========================================================
+BR1(config)#no enable password 
+7. How to secure privileged execution mode with secure method:
+==========================================================
+BR1(config)#enable secret cricket
+8. How to secure (Physical Access) the router:
+===========================================================
+BR1(config)#line console 0 
+BR1(config-line)#password football
+BR1(config-line)#login
+BR1(config-line)#exit
+
+9. How to assign IP on an interface:
+===========================================================
+BR1(config)#interface gig0/0/0
+BR1(config-if)#description This Link is connected to the LAN1
+BR1(config-if)#ip address 172.16.1.254 255.255.255.0
+BR1(config-if)#ipv6 add 2001:211:abc:acad::0/64
+BR1(config-if)#no shutdown
+
+BR1(config)#int gig0/0/1
+BR1(config-if)#description This Link is connected to the LAN2
+BR1(config-if)#ip add 172.16.2.254 255.255.255.0
+BR1(config-if)#ipv6 add 2001:211:ABC:ABAD::0/64
+BR1(config-if)#no shutdown
+
+10. How to enable IPv6 on a Router:
+============================================================
+BR1(config)#ipv6 unicast-routing 
+11. How to save running-config to start-up config:
+============================================================
+BR1#copy running-config startup-config 
+12. How to secure remotely login:
+===========================================================
+BR(config)#line vty 0 4
+BR(config-line)#password baseball
+BR(config-line)#login 
+BR(config-line)#exit
+
+13. How to login on a router using telnet:
+=========================================================
+C:\>telnet 172.16.1.254
+
+14. How to create usernames:
+============================================================
+BR(config)#username admin secret admin123
+
+15. How to merge local data to line console and line vty:
+============================================================
+BR(config)#line vty 0 4
+BR(config-line)#login local 
+
+BR1(config)#line console 0 
+BR1(config-line)#login local 
+
+16. How to write an IP domain-name:
+============================================================
+BR(config)#ip domain-name ccna.com
+ 17. How to configure SSH
+============================================================
+BR(config)#crypto key generate rsa
+How many bits in the modulus [512]: 1024
+BR(config)#line vty 0 4
+BR(config-line)#transport input ssh 
+BR(config-line)#login local
+BR(config-line)#exit
+
+18. How to login using SSH (remotely Login):
+================================================================
+C:\>ssh -l admin 172.16.1.254
+
+
+19. IP SSH Additional Features:
+===================================================================
+BR(config)# ip ssh version 2
+BR(config)#ip ssh time-out 60
+BR(config)#ip ssh authentication-retries 5
+
+20. How to set min-length of password:
+===================================================================
+BR(config)#security passwords min-length 8
+
+21. How to enable password encryption serivce:
+===================================================================
+BR(config)#service password-encryption 
+
+22. How to set ip on a switch:
+===================================================================
+Switch(config)#interface vlan 1
+Switch(config-if)#ip address 172.16.1.4 255.255.255.0
+Switch(config-if)#exit
+Switch(config)#ip default-gateway 172.16.1.254
+
+23. How to add vlan:
+===================================================================
+Core-SW(config)#vlan 10
+Core-SW(config-vlan)#nam
+Core-SW(config-vlan)#name SALES
+Core-SW(config-vlan)#VLA
+Core-SW(config-vlan)#VLAN
+Core-SW(config-vlan)#VLAN 20
+Core-SW(config-vlan)#NA
+Core-SW(config-vlan)#NAme HR
+
+24. How to add vtp server:
+===================================================================
+Core-SW(config)#VTP MODE SERver 
+Device mode already VTP SERVER.
+Core-SW(config)#VTP DOM
+Core-SW(config)#VTP DOMain Client
+Domain name already set to Client.
+Core-SW(config)#vpt pas
+Core-SW(config)#vpt pass
+Core-SW(config)#vtp pas
+Core-SW(config)#vtp password 123
+Password already set to 123
+
+25. How to add vtp client:
+===================================================================
+Switch(config)#vtp mode client 
+Device mode already VTP CLIENT.
+Switch(config)#vtp dom
+Switch(config)#vtp domain Client
+Domain name already set to Client.
+Switch(config)#vtp pass
+Switch(config)#vtp password 123
+Password already set to 123
+
+25. How to add DHCP pool to router:
+===================================================================
+ip dhcp excluded-address 192.168.2.0
+ip dhcp excluded-address 192.168.2.254
+!
+ip dhcp pool ISP-LAN
+ network 192.168.2.0 255.255.255.0
+ default-router 192.168.2.254
+
+26. How to set IPV6 in router:
+===================================================================
+ ipv6 unicast-routing
+interface GigabitEthernet0/0
+ ipv6 address 2001:A:B:1::100/64
+!
